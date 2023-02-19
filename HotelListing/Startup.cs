@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using HotelListing.Configurations;
 
 namespace HotelListing
 {
@@ -39,6 +41,8 @@ namespace HotelListing
                  .AllowAnyHeader()
                 );
             });
+
+            services.AddAutoMapper(typeof(MapperInitilizer));
 
             services.AddSwaggerGen(c =>
             {
