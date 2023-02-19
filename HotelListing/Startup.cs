@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using HotelListing.Configurations;
+using HotelListing.IRepository;
+using HotelListing.Repository;
 
 namespace HotelListing
 {
@@ -44,12 +46,14 @@ namespace HotelListing
 
             services.AddAutoMapper(typeof(MapperInitilizer));
 
+            services.AddTransient<IUnitOfWork, UnitOfWork>(); 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelListing", Version = "v1" });
             });
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(op =>
+            op.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
         }
 
